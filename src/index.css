@@ -8,51 +8,53 @@ All colors MUST be HSL.
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 222.2 84% 4.9%;
+    /* TikTok/Reels inspired design system */
+    --background: 0 0% 0%;
+    --foreground: 0 0% 100%;
 
-    --card: 0 0% 100%;
-    --card-foreground: 222.2 84% 4.9%;
+    --card: 220 13% 9%;
+    --card-foreground: 0 0% 98%;
 
-    --popover: 0 0% 100%;
-    --popover-foreground: 222.2 84% 4.9%;
+    --popover: 220 13% 9%;
+    --popover-foreground: 0 0% 98%;
 
-    --primary: 222.2 47.4% 11.2%;
-    --primary-foreground: 210 40% 98%;
+    /* Vibrant primary colors */
+    --primary: 340 82% 52%;
+    --primary-foreground: 0 0% 100%;
+    
+    --secondary: 260 85% 57%;
+    --secondary-foreground: 0 0% 100%;
 
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 222.2 47.4% 11.2%;
+    --muted: 220 13% 15%;
+    --muted-foreground: 240 5% 65%;
 
-    --muted: 210 40% 96.1%;
-    --muted-foreground: 215.4 16.3% 46.9%;
+    --accent: 47 96% 53%;
+    --accent-foreground: 220 13% 9%;
 
-    --accent: 210 40% 96.1%;
-    --accent-foreground: 222.2 47.4% 11.2%;
+    --destructive: 0 84% 60%;
+    --destructive-foreground: 0 0% 98%;
 
-    --destructive: 0 84.2% 60.2%;
-    --destructive-foreground: 210 40% 98%;
+    --border: 220 13% 15%;
+    --input: 220 13% 15%;
+    --ring: 340 82% 52%;
 
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 222.2 84% 4.9%;
+    --radius: 1rem;
 
-    --radius: 0.5rem;
-
-    --sidebar-background: 0 0% 98%;
-
-    --sidebar-foreground: 240 5.3% 26.1%;
-
-    --sidebar-primary: 240 5.9% 10%;
-
-    --sidebar-primary-foreground: 0 0% 98%;
-
-    --sidebar-accent: 240 4.8% 95.9%;
-
-    --sidebar-accent-foreground: 240 5.9% 10%;
-
-    --sidebar-border: 220 13% 91%;
-
-    --sidebar-ring: 217.2 91.2% 59.8%;
+    /* Video player specific colors */
+    --video-overlay: 0 0% 0% / 0.3;
+    --video-controls: 0 0% 100% / 0.9;
+    --like-heart: 0 84% 60%;
+    --follow-button: 47 96% 53%;
+    
+    /* Gradients */
+    --gradient-primary: linear-gradient(135deg, hsl(340, 82%, 52%), hsl(260, 85%, 57%));
+    --gradient-secondary: linear-gradient(135deg, hsl(47, 96%, 53%), hsl(340, 82%, 52%));
+    --gradient-overlay: linear-gradient(180deg, transparent 60%, hsl(0, 0%, 0%, 0.8) 100%);
+    
+    /* Shadows and effects */
+    --shadow-glow: 0 0 30px hsl(340, 82%, 52%, 0.3);
+    --shadow-video: 0 10px 40px hsl(0, 0%, 0%, 0.6);
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
   }
 
   .dark {
@@ -101,5 +103,53 @@ All colors MUST be HSL.
 
   body {
     @apply bg-background text-foreground;
+  }
+}
+
+@layer utilities {
+  /* Video feed specific utilities */
+  .video-container {
+    @apply relative w-full h-screen flex-shrink-0 overflow-hidden;
+  }
+  
+  .video-overlay {
+    background: var(--gradient-overlay);
+  }
+  
+  .action-button {
+    @apply w-12 h-12 rounded-full bg-card/20 backdrop-blur-sm border border-white/20 flex items-center justify-center transition-all duration-300 hover:scale-110 hover:bg-card/40;
+  }
+  
+  .follow-button {
+    background: var(--gradient-secondary);
+    @apply text-accent-foreground font-semibold;
+  }
+  
+  .like-active {
+    @apply text-destructive scale-110;
+    filter: drop-shadow(0 0 10px hsl(var(--like-heart)));
+  }
+  
+  .scroll-snap-container {
+    scroll-snap-type: y mandatory;
+    scroll-behavior: smooth;
+  }
+  
+  .scroll-snap-item {
+    scroll-snap-align: start;
+    scroll-snap-stop: always;
+  }
+}
+
+@layer components {
+  .gradient-text {
+    background: var(--gradient-primary);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+  }
+  
+  .glass-effect {
+    @apply bg-card/10 backdrop-blur-md border border-white/10;
   }
 }
